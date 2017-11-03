@@ -1,43 +1,45 @@
 package com.example.tuikai.gamedemo;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-
-import java.sql.BatchUpdateException;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-  GameView gameView;
-
+    Button button1 ,button2;
+    LinearLayout layout ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.game_view);
+        setContentView(R.layout.line_layout);
+        button1 =(Button)findViewById(R.id.button1);
+        button2 =(Button)findViewById(R.id.button2);
+        layout =(LinearLayout)findViewById(R.id.layout);
 
-         gameView =(GameView)findViewById(R.id.gameView);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //横向
+
+              layout.setOrientation(LinearLayout.HORIZONTAL);
+
+
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //纵向
+
+                layout.setOrientation(LinearLayout.VERTICAL);
+
+            }
+        });
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        float x =  event.getX();
-        float y = event.getY();
 
-        gameView.setPlaneX((int)x);
-        gameView.setPlaneY((int)y);
-        gameView.invalidate();//自动呈现方法
-        return super.onTouchEvent(event);
-    }
 }
